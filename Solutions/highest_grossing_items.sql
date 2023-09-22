@@ -4,6 +4,7 @@ WITH Ranked_Products AS (
     product,
     SUM(spend) as total_spend,
     ROW_NUMBER() OVER(PARTITION BY category ORDER BY SUM(spend) DESC) AS rnk
+    FROM product_spend
     WHERE EXTRACT(YEAR FROM transaction_date)='2022'
     GROUP BY category, product
 )
